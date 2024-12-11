@@ -1,0 +1,100 @@
+{
+  "hash": "42d10d0f",
+  "configHash": "f7409eaf",
+  "lockfileHash": "664589f3",
+  "browserHash": "088e6b19",
+  "optimized": {
+    "axios": {
+      "src": "../../node_modules/axios/index.js",
+      "file": "axios.js",
+      "fileHash": "f2199d6e",
+      "needsInterop": false
+    },
+    "moment": {
+      "src": "../../node_modules/moment/dist/moment.js",
+      "file": "moment.js",
+      "fileHash": "ef09a3a9",
+      "needsInterop": false
+    },
+    "moment/moment": {
+      "src": "../../node_modules/moment/moment.js",
+      "file": "moment_moment.js",
+      "fileHash": "25fb8235",
+      "needsInterop": true
+    },
+    "react": {
+      "src": "../../node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "9fabdd66",
+      "needsInterop": true
+    },
+    "react-day-picker": {
+      "src": "../../node_modules/react-day-picker/dist/esm/index.js",
+      "file": "react-day-picker.js",
+      "fileHash": "0e1745ca",
+      "needsInterop": false
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "82e6a152",
+      "needsInterop": true
+    },
+    "react-icons/fa6": {
+      "src": "../../node_modules/react-icons/fa6/index.mjs",
+      "file": "react-icons_fa6.js",
+      "fileHash": "a0c9356d",
+      "needsInterop": false
+    },
+    "react-icons/gr": {
+      "src": "../../node_modules/react-icons/gr/index.mjs",
+      "file": "react-icons_gr.js",
+      "fileHash": "85625fde",
+      "needsInterop": false
+    },
+    "react-icons/io": {
+      "src": "../../node_modules/react-icons/io/index.mjs",
+      "file": "react-icons_io.js",
+      "fileHash": "17db373b",
+      "needsInterop": false
+    },
+    "react-icons/md": {
+      "src": "../../node_modules/react-icons/md/index.mjs",
+      "file": "react-icons_md.js",
+      "fileHash": "b3bdccc3",
+      "needsInterop": false
+    },
+    "react-modal": {
+      "src": "../../node_modules/react-modal/lib/index.js",
+      "file": "react-modal.js",
+      "fileHash": "eb24b2f9",
+      "needsInterop": true
+    },
+    "react-router-dom": {
+      "src": "../../node_modules/react-router-dom/dist/index.js",
+      "file": "react-router-dom.js",
+      "fileHash": "78ff8ebe",
+      "needsInterop": false
+    },
+    "react-toastify": {
+      "src": "../../node_modules/react-toastify/dist/react-toastify.esm.mjs",
+      "file": "react-toastify.js",
+      "fileHash": "94ba7753",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-KLGTMP6T": {
+      "file": "chunk-KLGTMP6T.js"
+    },
+    "chunk-YHKKLOKN": {
+      "file": "chunk-YHKKLOKN.js"
+    },
+    "chunk-N4N5IM6X": {
+      "file": "chunk-N4N5IM6X.js"
+    },
+    "chunk-LK32TJAX": {
+      "file": "chunk-LK32TJAX.js"
+    }
+  }
+}
