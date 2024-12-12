@@ -133,87 +133,113 @@ const AddEditTravelStory = ({ storyInfo, type, onClose, getAllTravelStories }) =
     };
 
     return (
-        <div className="relative">
-            <div className="flex items-center justify-between">
-                <h5 className="text-xl font-medium text-slate-700">
-                    {type === "add" ? "Add Story" : "Update Story"}
-                </h5>
+    <div className="relative bg-white shadow-md p-4 rounded-lg">
+      {/* Header Section */}
+      <div className="flex sm:flex-row items-center sm:items-center justify-between  pb-4">
+        <h5 className="text-base md:text-2xl font-semibold text-slate-700">
+          {type === "add" ? "Add Story" : "Update Story"}
+        </h5>
 
-                <div>
-                    <div className="flex items-center gap-3 bg-cyan-50/50 p-2 rounded-l-lg">
-                        {type === "add" ? (
-                            <button
-                                className="btn-small"
-                                onClick={handleAddOrUpdateClick}
-                                disabled={loadingStatus !== ""}
-                            >
-                                {loadingStatus === "Adding..." ? "Adding..." : <><MdAdd className="text-lg" /> ADD STORY</>}
-                            </button>
-                        ) : (
-                            <>
-                                <button
-                                    className="btn-small"
-                                    onClick={handleAddOrUpdateClick}
-                                    disabled={loadingStatus !== ""}
-                                >
-                                    {loadingStatus === "Updating..." ? "Updating..." : <><MdUpdate className="text-lg" /> UPDATE STORY</>}
-                                </button>
-                            </>
-                        )}
-                        <button className="" onClick={onClose}>
-                            <MdClose className="text-xl text-slate-400" />
-                        </button>
-                    </div>
-
-                    {error && <p className="text-red-500 text-xs pt-2 text-right">{error}</p>}
-                </div>
-            </div>
-
-            <div>
-                <div className="felx-1 flex flex-col gap-2 pt-4">
-                    <label className="input-label">TITLE</label>
-                    <input
-                        type="text"
-                        className="text-2xl text-slate-950 outline-none"
-                        placeholder="A Day at the Great Wall"
-                        value={title}
-                        onChange={({ target }) => setTitle(target.value)}
-                    />
-
-                    <div className="my-3">
-                        <DateSelector date={visitedDate} setDate={setVisitedDate} />
-                    </div>
-
-                    <ImageSelector
-                        image={storyImg}
-                        setImage={setStoryImg}
-                        handleDeleteImg={handleDeleteStoryImg}
-                    />
-
-                    <div className="flex flex-col gap-2 mt-4">
-                        <label className="input-label">STORY</label>
-                        <textarea
-                            type="text"
-                            className="text-sm text-slate-950 outline-none bg-slate-50 p-2 rounded"
-                            placeholder="Your Story"
-                            rows={10}
-                            value={story}
-                            onChange={({ target }) => setStory(target.value)}
-                        />
-                    </div>
-
-                    <div className="pt-3">
-                        <label className="input-label">VISITED LOCATIONS</label>
-                        <TagInput tags={visitedLocation} setTags={setVisitedLocation} />
-                    </div>
-                </div>
-            </div>
-
-            {/* Display Loading Status */}
-            {loadingStatus && (
-                <p className="text-blue-500 text-sm pt-4">{loadingStatus}</p>
+        {/* Buttons Section */}
+        <div className="btn-small flex items-center gap-0.5 md:gap-2 bg-cyan-50/50 p-2 rounded-lg text-sky-500 hover:text-white  ">
+          <button
+            className="flex items-center gap-2 text-sm md:text-base "
+            onClick={handleAddOrUpdateClick}
+            disabled={loadingStatus !== ""}
+          >
+            {loadingStatus === "Adding..." || loadingStatus === "Updating..." ? (
+              <span>{loadingStatus}</span>
+            ) : (
+              <>
+                {type === "add" ? (
+                  <>
+                    <MdAdd className="text-base md:text-lg" />
+                    <span className="text-xs md:text-sm  ">
+                      ADD STORY
+                    </span>
+                  </>
+                ) : (
+                  <>
+                    <MdUpdate className="text-base md:text-lg" />
+                    <span className="text-xs md:text-base">
+                      UPDATE STORY
+                    </span>
+                  </>
+                )}
+              </>
             )}
+          </button>
+          <button onClick={onClose}>
+            <MdClose className=" text-lg md:text-xl" />
+          </button>
         </div>
+      </div>
+
+      {/* Error Message */}
+      {error && (
+        <p className="text-red-500 text-xs md:text-sm pt-2 text-right">
+          {error}
+        </p>
+      )}
+
+      {/* Form Section */}
+      <div className="flex-1 flex flex-col gap-4 pt-4">
+        {/* Title Input */}
+        <div className="flex flex-col gap-2">
+          <label className="input-label text-sm md:text-base">TITLE</label>
+          <input
+            type="text"
+            className="text-base md:text-base text-slate-950 outline-none focus:ring-0"
+            placeholder="A Day at the Great Wall"
+            value={title}
+            onChange={({ target }) => setTitle(target.value)}
+          />
+        </div>
+
+        {/* Date Selector */}
+        <div className="my-2">
+          <DateSelector date={visitedDate} setDate={setVisitedDate} />
+        </div>
+
+        {/* Image Selector */}
+        <ImageSelector
+          image={storyImg}
+          setImage={setStoryImg}
+          handleDeleteImg={handleDeleteStoryImg}
+        />
+
+        {/* Story Input */}
+        <div className="flex flex-col gap-2 mt-2">
+          <label className="input-label text-sm md:text-base">STORY</label>
+          <textarea
+            className="text-sm md:text-base text-slate-950 outline-none bg-slate-50 p-3 rounded-lg resize-none focus:ring-0"
+            placeholder="Your Story"
+            rows={8}
+            value={story}
+            onChange={({ target }) => setStory(target.value)}
+          />
+        </div>
+
+        {/* Visited Locations */}
+        <div className="">
+          <label className="input-label text-sm md:text-base">
+            VISITED LOCATIONS
+          </label>
+          <TagInput tags={visitedLocation} setTags={setVisitedLocation} />
+        </div>
+      </div>
+
+      {/* Loading Status */}
+      {loadingStatus && (
+        <p className="text-blue-500 text-sm md:text-base pt-4">
+          {loadingStatus}
+        </p>
+      )}
+    </div>
+  
+
+      
+
     );
 };
 

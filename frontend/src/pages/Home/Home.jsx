@@ -199,122 +199,131 @@ const Home =() =>{
         setSearchQuery={setSearchQuery}
         onSearchNote={onSearchStory}  
         handleClearSearch={handleClearSearch}/> 
+        <div className="2xl:container mx-auto">
+  <div className="w-[90%] mx-auto">
+    <div className="py-10">
 
-         <div className='container mx-auto py-10'>
+      {/* Filter Information Title */}
+      <FilterInfoTitle
+        filterType={filterType}
+        filterDates={dateRange}
+        onClear={() => resetFilter()}
+      />
 
-            <FilterInfoTitle
-            filterType={filterType}
-            filterDates={dateRange}
-            onClear={()=>{
-                resetFilter();
-            }}
-            />
-
-            <div className='flex mx-24 gap-7'>
-                <div className='flex-1'>
-                    {allStories.length >0 ? (
-                        <div className='grid grid-cols-2 gap-4'>
-                            {allStories.map((item)=>{
-                                return (
-                                    <TravelStoryCard
-                                    key={item._id}
-                                    imgUrl={item.imageUrl}
-                                    title={item.title}
-                                    story={item.story}
-                                    date={item.visitedDate}
-                                    visitedLocation={item.visitedLocation}
-                                    isFavourite={item.isFavourite}
-                                    onClick={()=>handleViewStory(item)}
-                                    onFavouriteClick={()=>updateIsFavourite(item)}
-                                    />
-                                );
-                            })}
-                        </div>
-                    ) :(
-                    <EmptyCard
-                        imgSrc={getEmptyCardImg(filterType)} 
-                        message={getEmptyCardMessage(filterType)}
-                         />
-                    )}
-                    </div>  
-
-                <div className='w-[350px]'>
-                    <div className='bg-white border border-slate-200 shadow-lg shadow-slate-200/60 rounded-lg'>
-                    <div className='p-3'>
-                        <DayPicker
-                        captionLayout='dropdown-buttons'
-                        mode="range"
-                        selected={dateRange}
-                        onSelect={handleDayClick}
-                        pagedNavigation
-                        />
-                        </div>
-                        </div>
-                    </div>                
+      {/* Main Content: Flex Layout */}
+      <div className="flex flex-col md:flex-row gap-7">
+        
+        {/* Travel Stories List */}
+        <div className="flex-1">
+          {allStories.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+              {allStories.map((item) => (
+                <TravelStoryCard
+                  key={item._id}
+                  imgUrl={item.imageUrl}
+                  title={item.title}
+                  story={item.story}
+                  date={item.visitedDate}
+                  visitedLocation={item.visitedLocation}
+                  isFavourite={item.isFavourite}
+                  onClick={() => handleViewStory(item)}
+                  onFavouriteClick={() => updateIsFavourite(item)}
+                />
+              ))}
             </div>
-        </div> 
-        
-         {/* Add & edit travel story modal*/}
-         < Modal 
-         isOpen={openAddEditModal.isShown}
-         onRequestClose={()=>{}}
-         style={{
-            overlay:{
-                backgroundColor:"rgba(0,0,0,0.2)",
-                zIndex:999,
-            },
-         }}
-         
-         appElement={document.getElementById("root")}
-         className="model-box"
-        >
-            <AddEditTravelStory 
-            type={openAddEditModal.type}
-            storyInfo={openAddEditModal.data}
-            onClose={()=>{
-                setOpenAddEditModal({isShown: false,type:"add",data:null });
-            }}
-            getAllTravelStories={getAllTravelStories}
+          ) : (
+            <EmptyCard
+              imgSrc={getEmptyCardImg(filterType)}
+              message={getEmptyCardMessage(filterType)}
             />
-        </Modal>
+          )}
+        </div>
 
-        
-         {/* View travel story modal*/}
-         < Modal 
-         isOpen={openViewModal.isShown}
-         onRequestClose={()=>{}}
-         style={{
-            overlay:{
-                backgroundColor:"rgba(0,0,0,0.2)",
-                zIndex:999,
-            },
-         }}
-         
-         appElement={document.getElementById("root")}
-         className="model-box"
-        >
-            <ViewTravelStory storyInfo={openViewModal.data || null } 
-            onClose={()=>{
-                setOpenViewModal((prevState)=>({...prevState,isShown:false}));
-            }} 
-            onEditClick={()=>{
-                setOpenViewModal((prevState)=>({...prevState,isShown:false}));
-                handleEdit(openViewModal.data || null);
-            }}
-             onDeleteClick={()=>{
-                deleteTravelStory(openViewModal.data || null);
-             }}/>
-        </Modal>
+        {/* Date Filter Picker */}
+        <div className="w-full sm:w-[350px] lg:w-[350px]">
+          <div className="bg-white border border-slate-200 shadow-lg rounded-lg">
+            <div className="p-3">
+              <DayPicker
+                captionLayout="dropdown-buttons"
+                mode="range"
+                selected={dateRange}
+                onSelect={handleDayClick}
+                pagedNavigation
+              />
+            </div>
+          </div>
+        </div>
 
-        <button 
-        className="w-16 h-16 flex items-center justify-center rounded-full bg-cyan-400 hover:bg-cyan-600 fixed right-10 bottom-10"
-        onClick={()=>{
-            setOpenAddEditModal({isShown:true,type:"add",data:null});
+      </div>
+    </div>
+
+    {/* Add & Edit Travel Story Modal */}
+    <Modal
+      isOpen={openAddEditModal.isShown}
+      onRequestClose={() => {}}
+      style={{
+        overlay: {
+          backgroundColor: "rgba(0,0,0,0.2)",
+          zIndex: 999,
+        },
+      }}
+      appElement={document.getElementById("root")}
+      className="model-box"
+    >
+      <AddEditTravelStory
+        type={openAddEditModal.type}
+        storyInfo={openAddEditModal.data}
+        onClose={() => {
+          setOpenAddEditModal({ isShown: false, type: "add", data: null });
         }}
-        >
-            <MdAdd className="text-[32px] text-white"/>
-        </button>
-        < ToastContainer />      
+        getAllTravelStories={getAllTravelStories}
+      />
+    </Modal>
+
+    {/* View Travel Story Modal */}
+    <Modal
+      isOpen={openViewModal.isShown}
+      onRequestClose={() => {}}
+      style={{
+        overlay: {
+          backgroundColor: "rgba(0,0,0,0.2)",
+          zIndex: 999,
+        },
+      }}
+      appElement={document.getElementById("root")}
+      className="model-box"
+    >
+      <ViewTravelStory
+        storyInfo={openViewModal.data || null}
+        onClose={() => {
+          setOpenViewModal((prevState) => ({ ...prevState, isShown: false }));
+        }}
+        onEditClick={() => {
+          setOpenViewModal((prevState) => ({ ...prevState, isShown: false }));
+          handleEdit(openViewModal.data || null);
+        }}
+        onDeleteClick={() => {
+          deleteTravelStory(openViewModal.data || null);
+        }}
+      />
+    </Modal>
+
+    {/* Floating Add Story Button */}
+    <button
+      className="w-10 h-10 md:w-16 md:h-16 flex items-center justify-center rounded-full bg-cyan-400 hover:bg-cyan-600 fixed right-6 bottom-6 sm:right-10 sm:bottom-10"
+      onClick={() => {
+        setOpenAddEditModal({ isShown: true, type: "add", data: null });
+      }}
+    >
+      <MdAdd className="text-[32px] text-white" />
+    </button>
+
+    <ToastContainer />
+
+  </div>
+</div>
+
+           
         </>
     );
 };
