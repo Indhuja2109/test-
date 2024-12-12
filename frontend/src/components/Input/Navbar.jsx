@@ -2,6 +2,8 @@ import React from "react";
 import ProfileInfo from "../Cards/ProfileInfo";
 import { useNavigate } from "react-router-dom";
 import SearchBar from "./SearchBar";
+import { BASE_URL } from '../../utils/constants';
+import axios from "axios"; // Import axios
 
 const Navbar = ({
   userInfo,
@@ -13,9 +15,30 @@ const Navbar = ({
   const isToken = localStorage.getItem("token");
   const navigate = useNavigate();
 
-  const onLogout = () => {
-    localStorage.clear();
-    navigate("/login");
+  const onLogout = async () => {
+    const token = localStorage.getItem("token");
+
+    try {
+      // Send a logout request to the backend
+      await axios.post(
+        `${BASE_URL}/logout`,
+        {}, // Add body data if necessary (e.g., { token })
+        {
+          headers: {
+            Authorization: `Bearer ${token}`, // Pass the token to backend
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      console.log("Logout successful on the server.");
+    } catch (error) {
+      console.error("Server logout failed:", error.message);
+    } finally {
+      // Clear token from localStorage and redirect to login
+      localStorage.removeItem("token");
+      navigate("/login", { replace: true }); // Make sure this happens after logout
+    }
   };
 
   const handleSearch = () => {

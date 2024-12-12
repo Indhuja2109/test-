@@ -100,6 +100,17 @@ app.post("/login",async(req,res)=>{
    });
 } );
 
+//Logout
+app.post("/logout", (req, res) => {
+   const token = req.headers.authorization?.split(" ")[1];
+   
+   // Invalidate token logic here (optional with JWT)
+   console.log("Token received for logout:", token);
+ 
+   res.status(200).json({ message: "Logged out successfully" });
+ });
+ 
+
 //Get user
 app.get("/get-user", authenticateToken,async(req,res)=>{
     const {userId}=req.user
