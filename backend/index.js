@@ -22,7 +22,7 @@ mongoose.connect (config.connectionString);
 
 const app=express();
 app.use(express.json());
-app.use(cors({orgin:"https://travel-story-update.vercel.app"}));
+app.use(cors({orgin:"https://test-ecru-five.vercel.app"}));
 
 //Create Account
 app.post("/create-account",async (req,res)=>{
