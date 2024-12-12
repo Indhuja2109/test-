@@ -3,6 +3,6 @@ import react from '@vitejs/plugin-react';
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
-  base: '/travel-story-app/', // Adjust to your subpath if necessary
+  base: '/',  // Set this to the correct base path if your app is not at the root
+  plugins: [react()]
 });
